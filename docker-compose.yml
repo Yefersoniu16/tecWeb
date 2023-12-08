@@ -1,0 +1,33 @@
+version : "3.7"
+services :
+  proyectos-monolito :
+    container_name : proyectos-monolito
+    image : proyectos-monolito:v2
+    build :
+      context : .
+    ports :
+        - "4001"
+    networks : 
+        - proyectos-app
+
+  proyectos-monolito-2 :
+    container_name : proyectos-monolito-2
+    image : proyectos-monolito:v2
+    ports :
+      - "4001"
+    networks : 
+        - proyectos-app
+
+  loader-balancer :
+    container_name : loader-balancer
+    image : loader-balancer:v1
+    build :
+      context : ./loader-balancer
+    ports :
+        - "4003:80"
+    networks : 
+        - proyectos-app
+
+networks :
+  proyectos-app :
+
